@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
 
-  get '/games' => 'games#index'
-  get '/users' => 'users#index'
-  get '/words' => 'words#index'
-
+  resources :games
+  resources :users
+  resources :words
   resources :gamewords
   resources :gameusers
 

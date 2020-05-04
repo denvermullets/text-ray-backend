@@ -21,17 +21,17 @@ ActiveRecord::Schema.define(version: 2020_05_04_183648) do
 
   create_table "gameusers", force: :cascade do |t|
     t.integer "score"
-    t.bigint "users_id"
-    t.bigint "games_id"
-    t.index ["games_id"], name: "index_gameusers_on_games_id"
-    t.index ["users_id"], name: "index_gameusers_on_users_id"
+    t.bigint "user_id"
+    t.bigint "game_id"
+    t.index ["game_id"], name: "index_gameusers_on_game_id"
+    t.index ["user_id"], name: "index_gameusers_on_user_id"
   end
 
   create_table "gamewords", force: :cascade do |t|
-    t.bigint "games_id"
-    t.bigint "words_id"
-    t.index ["games_id"], name: "index_gamewords_on_games_id"
-    t.index ["words_id"], name: "index_gamewords_on_words_id"
+    t.bigint "game_id"
+    t.bigint "word_id"
+    t.index ["game_id"], name: "index_gamewords_on_game_id"
+    t.index ["word_id"], name: "index_gamewords_on_word_id"
   end
 
   create_table "users", force: :cascade do |t|

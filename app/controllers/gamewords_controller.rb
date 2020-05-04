@@ -6,7 +6,7 @@ class GamewordsController < ApplicationController
     end
 
     def show
-        gameword = Gameword.find(params[:id])
+        gameword = Gameword.find_by(game_id: params[:id])
         render json: gameword
     end
     
