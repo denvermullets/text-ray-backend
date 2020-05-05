@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :game_words
+  resources :game_users
   resources :games
-  resources :users
   resources :words
-  resources :gamewords
-  resources :gameusers
+  resources :users
 
 end

@@ -1,6 +1,4 @@
-
-class Word < ApplicationRecord 
-    has_many :gamewords
-    has_many :games, through: :gamewords
-
- end
+class Word < ApplicationRecord
+    has_many :game_words
+    has_many :games, through: :game_words
+end

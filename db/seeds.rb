@@ -2,7 +2,7 @@ require 'rest-client'
 require 'json'
 
 Word.destroy_all
-Gameword.destroy_all
+GameWord.destroy_all
 Game.destroy_all
 
 Game.create(letters: "paeglmx")
@@ -56,11 +56,12 @@ array.each do |word|
     url = RestClient.get("https://www.dictionaryapi.com/api/v3/references/collegiate/json/#{word}?key=#{mykey}")
     word_parse = JSON.parse(url)
     points = calculate_points(word)
-    Word.create(word: word, point_value: points)
+    Word.create(spelling_word: word, point_value: points)
 
-    wordID = Word.find_by(word: word).id
+    wordID = Word.find_by(spelling_word: word)
     gameID = Game.find_by(letters: "paeglmx")
-    x = Gameword.create(word_id: wordID, game_id: gameID)
+    x = GameWord.create(word_id: wordID.id, game_id: gameID.id)
+
         if x.id 
             puts "created #{word}"
         end 
