@@ -10,37 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_183648) do
+ActiveRecord::Schema.define(version: 2020_05_05_140201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "game_users", force: :cascade do |t|
+    t.integer "game_id"
+    t.integer "user_id"
+    t.integer "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "game_words", force: :cascade do |t|
+    t.integer "game_id"
+    t.integer "word_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "games", force: :cascade do |t|
     t.string "letters"
-  end
-
-  create_table "gameusers", force: :cascade do |t|
-    t.integer "score"
-    t.bigint "user_id"
-    t.bigint "game_id"
-    t.index ["game_id"], name: "index_gameusers_on_game_id"
-    t.index ["user_id"], name: "index_gameusers_on_user_id"
-  end
-
-  create_table "gamewords", force: :cascade do |t|
-    t.bigint "game_id"
-    t.bigint "word_id"
-    t.index ["game_id"], name: "index_gamewords_on_game_id"
-    t.index ["word_id"], name: "index_gamewords_on_word_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "words", force: :cascade do |t|
+    t.string "spelling_word"
     t.integer "point_value"
-    t.string "word"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
