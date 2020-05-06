@@ -8,4 +8,6 @@ class GamesController < ApplicationController
         game = Game.find(params[:id])
         render json: game
       end 
+
+      
 end
