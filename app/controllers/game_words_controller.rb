@@ -5,7 +5,13 @@ class GameWordsController < ApplicationController
       end
   
       def show
-          gameword = GameWord.find_by(game_id: params[:id])
-          render json: gameword
+        words = GameWord.all
+        gamewords = []
+        words.each do |word| 
+            if word.game_id == (params[:id]).to_i
+                gamewords << word
+            end 
+        end 
+        render json: gamewords
       end
 end

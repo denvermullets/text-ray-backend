@@ -7,7 +7,7 @@ class WordsController < ApplicationController
       def show
         # word = Word.find(params[:id])
         word = checkWord(params[:id])
-        render json: word
+        render json: word, except: [:created_at, :updated_at]
   
       end
       
@@ -27,7 +27,7 @@ class WordsController < ApplicationController
               url = RestClient.get("https://www.dictionaryapi.com/api/v3/references/collegiate/json/#{input}?key=#{mykey}")
               word_parse = JSON.parse(url)
               
-              if word_parse.length > 0 
+              if word_parse.meta.id.length > 0 
                   points = calculate_points(input)
                   Word.create(spelling_word: input, point_value: points)
               else 

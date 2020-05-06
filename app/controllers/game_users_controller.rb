@@ -8,4 +8,15 @@ class GameUsersController < ApplicationController
           gameuser = GameUser.find(params[:id])
           render json: gameuser
       end
+
+      def create 
+        gameuser = GameUser.create(game_user_params)
+        render json: gameuser
+      end
+
+      private
+
+      def game_user_params
+        params.require(:game_user).permit(:user_id,:score, :game_id)
+      end
 end
