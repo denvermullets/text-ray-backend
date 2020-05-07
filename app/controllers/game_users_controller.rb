@@ -14,6 +14,14 @@ class GameUsersController < ApplicationController
         render json: gameuser
       end
 
+      def update
+        gameuser = GameUser.find(params[:id])
+    
+        gameuser.update(game_user_params)
+    
+        render json: gameuser
+      end
+
       private
 
       def game_user_params
