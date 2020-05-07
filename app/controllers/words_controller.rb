@@ -26,12 +26,12 @@ class WordsController < ApplicationController
               mykey = ENV["API_KEY"] 
               url = RestClient.get("https://www.dictionaryapi.com/api/v3/references/collegiate/json/#{input}?key=#{mykey}")
               word_parse = JSON.parse(url)
-              
-              if word_parse.meta.id.length > 0 
+                # byebug
+            found_word = word_parse[0]["meta"]["id"] rescue nil
+
+            if found_word 
                   points = calculate_points(input)
                   Word.create(spelling_word: input, point_value: points)
-              else 
-                  return "Not a real word, biotch"
               end
           else 
               return find_word
