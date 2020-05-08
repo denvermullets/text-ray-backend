@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :words
   resources :users
 
+  get '/user_by_id/:id', to: 'users#user_by_id'
+
 end

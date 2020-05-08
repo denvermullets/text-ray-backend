@@ -1,6 +1,6 @@
 class GameUsersController < ApplicationController
     def index
-        gameusers = GameUser.all
+        gameusers = GameUser.all.sort_by { |game| -game.score }
         render json: gameusers
       end
       
