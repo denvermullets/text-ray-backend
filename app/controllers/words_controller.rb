@@ -21,20 +21,21 @@ class WordsController < ApplicationController
           
       
       def checkWord(input) 
-          find_word = Word.find_by(spelling_word: input) rescue nil
-          if !find_word
-              mykey = ENV["API_KEY"] 
-              url = RestClient.get("https://www.dictionaryapi.com/api/v3/references/collegiate/json/#{input}?key=#{mykey}")
-              word_parse = JSON.parse(url)
-                # byebug
+        find_word = Word.where(spelling_word: input).exists?
+        if (find_word)
+            find_word = Word.find_by(spelling_word: input)
+            return find_word
+        else
+            mykey = ENV["API_KEY"] 
+            url = RestClient.get("https://www.dictionaryapi.com/api/v3/references/collegiate/json/#{input}?key=#{mykey}")
+            word_parse = JSON.parse(url)
+            # byebug
             found_word = word_parse[0]["meta"]["id"] rescue nil
 
             if found_word 
                   points = calculate_points(input)
                   Word.create(spelling_word: input, point_value: points)
               end
-          else 
-              return find_word
           end
       end #end of checkword method
 end

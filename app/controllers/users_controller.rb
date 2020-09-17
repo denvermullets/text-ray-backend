@@ -5,8 +5,8 @@ class UsersController < ApplicationController
       end
   
       def show
-        user = User.find_by(name: params[:id])
-        render json: user
+        found_user = User.find_by(name: params[:id])
+        render json: found_user
       end 
 
       def create 
@@ -18,6 +18,17 @@ class UsersController < ApplicationController
       def user_by_id
         user = User.find(params[:id])
         render json: user
+      end
+
+      def check_user
+        user = User.where(name: params[:id]).exists?
+        if (user)
+          found_user = User.find_by(name: params[:id])
+          render json: found_user
+        else 
+          user = User.create(name: params[:name])
+          render json: user
+        end 
       end
 
       private
